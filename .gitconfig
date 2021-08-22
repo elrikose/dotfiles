@@ -1,6 +1,6 @@
 [user]
-  name = Jeff Geerling
-  email = geerlingguy@mac.com
+  name = Erik Martin
+  email = erik.martin@hitachivantara.com
 [core]
   editor = vi
   excludesfile = ~/.gitignore
@@ -12,8 +12,6 @@
   status = auto
 [init]
   defaultBranch = master
-[web]
-  browser = google-chrome
 [credential]
   helper = osxkeychain
 [push]
@@ -23,12 +21,12 @@
 [difftool]
   prompt = false
 [alias]
-  c = commit
-  ca = commit -a
-  cm = commit -m
-  cam = commit -am
-  d = diff
-  dc = diff --cached
-  l = log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit
-[pull]
-	rebase = true
+    cleanup = !git remote prune origin && git gc && git clean -dfx && git stash clear
+    co = checkout
+    cob = checkout -b
+    who = shortlog -n -s --no-merges
+    rems = remote -v
+    mergeff = merge --ff-only
+    pullff = pull --ff-only
+    fpush = push --force
+    recent = "for-each-ref --sort=-committerdate refs/heads/ --format='%1B[0;33m%(refname:short)%1B[m: %(subject)' "

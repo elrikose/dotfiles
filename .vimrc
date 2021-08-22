@@ -1,7 +1,7 @@
 syntax on               " enable syntax highlighting
 set cursorline          " highlight the current line
 " set background=dark   " darker color scheme
-" set ruler             " show line number in bar
+set ruler             " show line number in bar
 set nobackup            " don't create pointless backup files; Use VCS instead
 set autoread            " watch for file changes
 set number              " show line numbers
@@ -15,11 +15,7 @@ filetype on             " enable filetype detection
 filetype indent on      " enable filetype-specific indenting
 filetype plugin on      " enable filetype-specific plugins
 " colorscheme cobalt      " requires cobalt.vim to be in ~/.vim/colors
-
-" column-width visual indication
-let &colorcolumn=join(range(81,999),",")
-highlight ColorColumn ctermbg=235 guibg=#001D2F
-
+ 
 " tabs and indenting
 set autoindent          " auto indenting
 set smartindent         " smart indenting
@@ -29,7 +25,7 @@ set shiftwidth=2        " 2 spaces for indentation
 
 " bells
 set noerrorbells        " turn off audio bell
-set visualbell          " but leave on a visual bell
+" set visualbell          " but leave on a visual bell
 
 " search
 set hlsearch            " highlighted search results
