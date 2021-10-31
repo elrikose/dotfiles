@@ -147,7 +147,7 @@ alias ping="ping -c 5" # ping 5 times ‘by default’
 alias netscan0='sudo ngrep -d en0'
 alias netscan1='sudo ngrep -d en1'
 alias qlf='qlmanage -p "$@" >& /dev/null'
-alias flushdns='sudo killall -HUP mDNSResponder'
+alias flushdns='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
 
 # Misc
 alias d2u=dos2unix
