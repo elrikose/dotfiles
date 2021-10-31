@@ -90,7 +90,7 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # Screen                                                                      #
 ###############################################################################
 
-# Save screenshots to Downloads folder.
+# Save screenshots to Desktop folder.
 defaults write com.apple.screencapture location -string "${HOME}/Desktop"
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
@@ -105,8 +105,8 @@ defaults write com.apple.screencapture disable-shadow -bool true
 
 # Set Desktop as the default location for new Finder windows
 # For other paths, use `PfLo` and `file:///full/path/here/`
-defaults write com.apple.finder NewWindowTarget -string "PfDe"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
+defaults write com.apple.finder NewWindowTarget -string "PfLo"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
 # Show icons for hard drives, servers, and removable media on the desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
@@ -116,6 +116,9 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Finder: show hidden files by default
 # defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Finder: Don't warn when emptying the trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -154,9 +157,9 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 64" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 64" ~/Library/Preferences/com.apple.finder.plist
 
-# Use column view in all Finder windows by default
+# Use list view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `Nlsv`, `clmv`, `Flwv`
-defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Show the ~/Library folder
 chflags nohidden ~/Library
@@ -189,15 +192,18 @@ defaults write com.apple.universalaccess reduceTransparency -bool true
 # 10: Put display to sleep
 # 11: Launchpad
 # 12: Notification Center
-# Bottom right screen corner → Mission Control
-defaults write com.apple.dock wvous-br-corner -int 2
-defaults write com.apple.dock wvous-br-modifier -int 0
-# Top right screen corner → Put display to sleep
-defaults write com.apple.dock wvous-tr-corner -int 10
-defaults write com.apple.dock wvous-tr-modifier -int 0
-# Bottom left screen corner → Desktop
-defaults write com.apple.dock wvous-bl-corner -int 4
+# Top left screen corner → Put display to sleep
+defaults write com.apple.dock wvous-tl-corner -int 10
+defaults write com.apple.dock wvous-tl-modifier -int 0
+# Bottom left screen corner → Noop
+defaults write com.apple.dock wvous-bl-corner -int 0
 defaults write com.apple.dock wvous-bl-modifier -int 0
+# Top right screen corner → Noop
+defaults write com.apple.dock wvous-tr-corner -int 0
+defaults write com.apple.dock wvous-tr-modifier -int 0
+# Bottom right screen corner → Disable screen saver
+defaults write com.apple.dock wvous-br-corner -int 6
+defaults write com.apple.dock wvous-br-modifier -int 0
 
 ###############################################################################
 # Safari & WebKit                                                             #
