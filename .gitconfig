@@ -21,12 +21,12 @@
 [difftool]
   prompt = false
 [alias]
-    cleanup = !git remote prune origin && git gc && git clean -dfx && git stash clear
-    co = checkout
-    cob = checkout -b
-    who = shortlog -n -s --no-merges
-    rems = remote -v
-    mergeff = merge --ff-only
-    pullff = pull --ff-only
-    fpush = push --force
-    recent = "for-each-ref --sort=-committerdate refs/heads/ --format='%1B[0;33m%(refname:short)%1B[m: %(subject)' "
+  cleanup = !git remote prune origin && git gc && git clean -dfx && git stash clear
+  co = checkout
+  cob = checkout -b
+  who = shortlog -n -s --no-merges
+  rems = remote -v
+  mergeff = merge --ff-only
+  pullff = pull --ff-only
+  fpush = push --force
+  recent = "for-each-ref --sort=-committerdate refs/heads/ --format='%1B[0;33m%(refname:short)%1B[m: %(subject)' "
