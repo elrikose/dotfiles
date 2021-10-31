@@ -479,9 +479,19 @@ alias code=vs
 
 function dict() { open dict:///"$@" ; }
 
-
+#
 # Scripts
+#
 alias traffic='python3 ~/bin/traffic.py'
+
+export BACKUP_LOG="${HOME}/Backups/backup.log"
+function full_backup() {
+    pushd
+    cd "${HOME}/bin"
+    python3 backups.py full 2>&1  >> "${BACKUP_LOG}"
+    tail -100 "${BACKUP_LOG}"
+    popd
+}
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
