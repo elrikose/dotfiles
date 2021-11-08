@@ -195,12 +195,6 @@ function je()
   popd
 }
 
-# Include alias file (if present) containing aliases for ssh, etc.
-if [ -f ~/.aliases ]
-then
-  source ~/.aliases
-fi
-
 # Set architecture-specific brew share path.
 arch_name="$(uname -m)"
 if [ "${arch_name}" = "x86_64" ]; then
@@ -236,6 +230,12 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # Tell homebrew to not autoupdate every single time I run it (just once a week).
 export HOMEBREW_AUTO_UPDATE_SECS=604800
+
+# Include alias file (if present) containing aliases for ssh, etc.
+if [ -f ~/.aliases ]
+then
+  source ~/.aliases
+fi
 
 # Delete a given line number in the known_hosts file.
 knownrm() {
