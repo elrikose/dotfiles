@@ -15,7 +15,7 @@
 [credential]
   helper = osxkeychain
 [push]
-  default = simple
+  default = current
 [merge]
   tool = kdiff3
 [difftool]
