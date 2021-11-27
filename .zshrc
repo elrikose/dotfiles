@@ -27,6 +27,9 @@ autoload -U colors && colors
 setopt PROMPT_SUBST
 PROMPT='%{$fg[green]%}%(5~|%-1~/.../%3~|%4~)%{$fg[yellow]%}$(parse_git_branch)%{$reset_color%} $ '
 
+# Turn off unterminated commands that don't end in a newline like `curl`
+unsetopt prompt_cr prompt_sp
+
 # Completions
 autoload -Uz compinit && compinit
 if [[ -n ${HOME}/.zcompdump(#qN.mh+24) ]]; then
