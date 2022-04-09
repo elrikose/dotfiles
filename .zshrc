@@ -92,8 +92,8 @@ alias la="ls -alFG"
 alias dir=ls
 alias grep='grep --color=auto'
 # In Zsh, history is really fc
-alias h='fc -l 1'
-alias hl='fc -lf 1'
+alias h='fc -li 1'
+alias hl='fc -lfi 1'
 alias eject='drutil tray eject'
 alias redo='sudo $(history -p \!\!)'
 alias down='cd ~/Downloads'
