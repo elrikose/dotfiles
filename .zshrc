@@ -1,3 +1,4 @@
+#zmodload zsh/zprof
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:~/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
 
 # Colorize the terminal
@@ -227,17 +228,28 @@ alias src='cd $SOURCE_DIR'
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 # Go development
-export GOPATH="${HOME}/.go"
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+#export GOPATH="${HOME}/.go"
+#export GOROOT="$(brew --prefix golang)/libexec"
+#export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # Tell homebrew to not autoupdate every single time I run it (just once a week).
 export HOMEBREW_AUTO_UPDATE_SECS=604800
 
 # Include alias file (if present) containing aliases for ssh, etc.
-if [ -f ~/.aliases ]
+ALIASES=~/.aliases
+if [ -f $ALIASES ]
 then
-  source ~/.aliases
+  source $ALIASES
+fi
+
+# ZSH Plugins from https://github.com/zsh-users
+export ZSH_PLUGINS=~/.zsh
+
+# Include zsh autosuggestions plugin
+AUTOSUGGESTIONS_PLUGIN=$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [ -f $AUTOSUGGESTIONS_PLUGIN ]
+then
+  source $AUTOSUGGESTIONS_PLUGIN
 fi
 
 # Delete a given line number in the known_hosts file.
@@ -573,3 +585,12 @@ function pp()
 {
     my_ps | awk '!/awk/ && $0~var' var=${1:-".*"} ;
 }
+#zprof
+
+# Include zsh syntax highlighting plugin
+SYNTAX_HIGHLIGHTING_PLUGIN=$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f $SYNTAX_HIGHLIGHTING_PLUGIN ]
+then
+  source $SYNTAX_HIGHLIGHTING_PLUGIN
+fi
+
