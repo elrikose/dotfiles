@@ -209,11 +209,6 @@ else
     echo "Unknown architecture: ${arch_name}"
 fi
 
-# Allow history search via up/down keys.
-source ${share_path}/zsh-history-substring-search/zsh-history-substring-search.zsh
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
-
 #
 # Development
 #
@@ -244,6 +239,15 @@ fi
 
 # ZSH Plugins from https://github.com/zsh-users
 export ZSH_PLUGINS=~/.zsh
+
+# Allow history search via up/down keys.
+HISTORY_SEARCH_PLUGIN=$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh
+if [ -f $HISTORY_SEARCH_PLUGIN ]
+then
+  source $HISTORY_SEARCH_PLUGIN
+  bindkey "^[[A" history-substring-search-up
+  bindkey "^[[B" history-substring-search-down
+fi
 
 # Include zsh autosuggestions plugin
 AUTOSUGGESTIONS_PLUGIN=$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -541,7 +545,6 @@ function rgrep
 {
    grep --color=auto -r --include="$2" --exclude-dir=.svn --exclude-dir=.git "$1" ${*:3} .  2>/dev/null;
 }
-alias rg=rgrep
 
 # Edit in-place file(s), dump old changes to backup
 function sedf
