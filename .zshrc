@@ -198,10 +198,6 @@ alias netscan1='sudo ngrep -d en1'
 alias qlf='qlmanage -p "$@" >& /dev/null'
 alias flushdns='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
 
-# Fuzzy Find (fzf)
-alias vsf="fzf -m | xargs code"
-alias pf="fzf -m --preview 'bat --color=always {}' --preview-window 'right,60%'"
-
 # Misc
 alias d2u=dos2unix
 alias d2ui='dos2unix -ih'
@@ -539,6 +535,10 @@ alias xc=xcode
 alias te=edit
 alias vs='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
 alias code=vs
+
+# Fuzzy Find (fzf)
+alias vsf='vs $(fzf -m)'
+alias pf="fzf -m --preview 'bat --color=always {}' --preview-window 'right,60%'"
 
 function dict() { open dict:///"$@" ; }
 
