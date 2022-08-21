@@ -5,28 +5,73 @@ export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libex
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-# Prompt
-current_git_branch() {
+# Prompt functions
+function check_last_exit_code() {
+  local LAST_EXIT_CODE=$?
+  if [[ $LAST_EXIT_CODE -ne 0 ]]; then
+    echo "%{$fg_bold[red]%}($LAST_EXIT_CODE)%{$reset_color%} "
+  fi
+}
+
+function current_path() {
+  echo "%{$fg[green]%}%(5~|%-1~/.../%3~|%4~)%{$reset_color%}"
+}
+
+function current_git_branch() {
   git branch 2> /dev/null | grep \* | cut -d' ' -f2
 }
 
-show_git_branch() {
-   pushd $1
-   echo -n `basename $1`
-   git branch 2> /dev/null | grep \* | cut -d' ' -f2
-   popd
-}
-
-parse_git_branch() {
+function parse_git_branch() {
   GIT_BRANCH=$(current_git_branch)
   if [ ! -z "${GIT_BRANCH}" ]; then
-     echo " ($GIT_BRANCH)"
+     echo " %{$fg[yellow]%}($GIT_BRANCH)%{$reset_color%}"
+  fi
+}
+
+# Timer for right prompt
+function preexec() {
+  timer=$(($(print -P %D{%s%6.})/1000))
+}
+
+# function precmd() {
+#   if [ $timer ]; then
+#     export RPROMPT="$(execution_time)"
+#     unset timer
+#   fi
+# }
+
+function execution_time() {
+  if [ $timer ]; then
+    local now=$(($(print -P %D{%s%6.})/1000))
+    local d_ms=$(($now-$timer))
+    local d_s=$((d_ms / 1000))
+    local ms=$((d_ms % 1000))
+    local s=$((d_s % 60))
+    local m=$(((d_s / 60) % 60))
+    local h=$((d_s / 3600))
+
+    if ((h > 0)); then elapsed="${h}h ${m}m"
+    elif ((m > 0)); then elapsed="${m}m ${s}s"
+    elif ((s >= 10)); then elapsed=${s}.$((ms / 100))s
+    elif ((ms > 200)); then elapsed=${s}.$((ms / 10))s
+    else elapsed=${ms}ms
+    fi
+
+    local datetime=$(print -P %D{%H:%M:%S})
+    echo "%F{cyan}(${elapsed}) ${datetime}%{$reset_color%} "
+
+    #export RPROMPT="%F{cyan}(${elapsed}) ${datetime}%{$reset_color%}"
+    unset timer
+  else
+    local datetime=$(print -P %D{%H:%M:%S})
+    echo "%F{cyan}${datetime}%{$reset_color%} "
   fi
 }
 
 autoload -U colors && colors
 setopt PROMPT_SUBST
-PROMPT='%{$fg[green]%}%(5~|%-1~/.../%3~|%4~)%{$fg[yellow]%}$(parse_git_branch)%{$reset_color%} $ '
+PROMPT='$(check_last_exit_code)$(execution_time)$(current_path)$(parse_git_branch)
+$ '
 
 # Turn off unterminated commands that don't end in a newline like `curl`
 unsetopt prompt_cr prompt_sp
@@ -155,7 +200,7 @@ alias flushdns='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
 
 # Fuzzy Find (fzf)
 alias vsf="fzf -m | xargs code"
-alias pf="fzf -m --preview 'bat --color=always {}'"
+alias pf="fzf -m --preview 'bat --color=always {}' --preview-window 'right,60%'"
 
 # Misc
 alias d2u=dos2unix
