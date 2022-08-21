@@ -85,7 +85,7 @@ hist_stats() {
 alias hs=hist_stats
 
 #
-# Bash
+# Shell
 #
 alias ls="ls -FG"
 alias ll="ls -lFG"
@@ -152,6 +152,10 @@ alias netscan0='sudo ngrep -d en0'
 alias netscan1='sudo ngrep -d en1'
 alias qlf='qlmanage -p "$@" >& /dev/null'
 alias flushdns='sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder'
+
+# Fuzzy Find (fzf)
+alias vsf="fzf -m | xargs code"
+alias pf="fzf -m --preview 'bat --color=always {}'"
 
 # Misc
 alias d2u=dos2unix
@@ -242,19 +246,14 @@ export ZSH_PLUGINS=~/.zsh
 
 # Allow history search via up/down keys.
 HISTORY_SEARCH_PLUGIN=$ZSH_PLUGINS/zsh-history-substring-search/zsh-history-substring-search.zsh
-if [ -f $HISTORY_SEARCH_PLUGIN ]
-then
-  source $HISTORY_SEARCH_PLUGIN
-  bindkey "^[[A" history-substring-search-up
-  bindkey "^[[B" history-substring-search-down
-fi
+[ -f $HISTORY_SEARCH_PLUGIN ] && source $HISTORY_SEARCH_PLUGIN && bindkey "^[[A" history-substring-search-up && bindkey "^[[B" history-substring-search-down
 
 # Include zsh autosuggestions plugin
 AUTOSUGGESTIONS_PLUGIN=$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
-if [ -f $AUTOSUGGESTIONS_PLUGIN ]
-then
-  source $AUTOSUGGESTIONS_PLUGIN
-fi
+[ -f $AUTOSUGGESTIONS_PLUGIN ] && source $AUTOSUGGESTIONS_PLUGIN
+
+# Include Fuzzy Search plugin
+[ -f ~/.zsh/.fzf.zsh ] && source ~/.zsh/.fzf.zsh
 
 # Delete a given line number in the known_hosts file.
 knownrm() {
@@ -592,8 +591,4 @@ function pp()
 
 # Include zsh syntax highlighting plugin
 SYNTAX_HIGHLIGHTING_PLUGIN=$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-if [ -f $SYNTAX_HIGHLIGHTING_PLUGIN ]
-then
-  source $SYNTAX_HIGHLIGHTING_PLUGIN
-fi
-
+[ -f $SYNTAX_HIGHLIGHTING_PLUGIN ] && source $SYNTAX_HIGHLIGHTING_PLUGIN
