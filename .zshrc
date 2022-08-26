@@ -28,19 +28,13 @@ function parse_git_branch() {
   fi
 }
 
-# Timer for right prompt
+# Timer for prompt
 function preexec() {
   timer=$(($(print -P %D{%s%6.})/1000))
 }
 
-# function precmd() {
-#   if [ $timer ]; then
-#     export RPROMPT="$(execution_time)"
-#     unset timer
-#   fi
-# }
-
 function execution_time() {
+  local datetime=$(print -P %D{%H:%M:%S})
   if [ $timer ]; then
     local now=$(($(print -P %D{%s%6.})/1000))
     local d_ms=$(($now-$timer))
@@ -57,13 +51,10 @@ function execution_time() {
     else elapsed=${ms}ms
     fi
 
-    local datetime=$(print -P %D{%H:%M:%S})
     echo "%F{cyan}(${elapsed}) ${datetime}%{$reset_color%} "
 
-    #export RPROMPT="%F{cyan}(${elapsed}) ${datetime}%{$reset_color%}"
     unset timer
   else
-    local datetime=$(print -P %D{%H:%M:%S})
     echo "%F{cyan}${datetime}%{$reset_color%} "
   fi
 }
