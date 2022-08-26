@@ -70,8 +70,7 @@ function execution_time() {
 
 autoload -U colors && colors
 setopt PROMPT_SUBST
-PROMPT='$(check_last_exit_code)$(execution_time)$(current_path)$(parse_git_branch)
-$ '
+PROMPT='$(check_last_exit_code)$(execution_time)$(current_path)$(parse_git_branch) $ '
 
 # Turn off unterminated commands that don't end in a newline like `curl`
 unsetopt prompt_cr prompt_sp
