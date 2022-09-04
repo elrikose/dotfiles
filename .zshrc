@@ -103,6 +103,8 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 # removes blank lines from history
 setopt HIST_REDUCE_BLANKS
+# tilde expansion
+set -o magicequalsubst
 
 # History Stats
 HISTFILESIZE=1000000000
