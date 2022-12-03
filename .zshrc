@@ -437,8 +437,22 @@ alias up_devops='up_remote devops'
 # Kubernetes
 #
 alias k=kubectl
+alias kn="kubectl get nodes -o wide"
+alias kp="kubectl get pods -o wide"
+alias ks="kubectl get svc -o wide"
+alias ka="kubectl get all -A"
+
+alias kdn="kubectl describe nodes"
+alias kdp="kubectl describe pods"
+alias kds="kubectl describe svc"
+
 alias kl="kubectl logs"
 alias kt="kubectl top"
+
+# short alias to set/show context/namespace (only works for bash and bash-compatible shells, current context to be set before using kn to set namespace) 
+alias kctx='f() { [ "$1" ] && kubectl config use-context $1 || kubectl config current-context ; } ; f'
+alias kns='f() { [ "$1" ] && kubectl config set-context --current --namespace $1 || kubectl config view --minify | grep namespace | cut -d" " -f6 ; } ; f'
+
 function klabels()
 {
   for item in $( kubectl get pod --output=name); do printf "Labels for %s\n" "$item" | grep --color -E '[^/]+$' && kubectl get "$item" --output=json | jq -r -S '.metadata.labels | to_entries | .[] | " \(.key)=\(.value)"' 2>/dev/null; printf "\n"; done
