@@ -130,9 +130,9 @@ alias hs=hist_stats
 #
 # Shell
 #
-alias ls="ls -FG"
-alias ll="ls -lFG"
-alias la="ls -alFG"
+alias ls="ls -FG --color=auto"
+alias ll="ls -lFG --color=auto"
+alias la="ls -alFG --color=auto"
 alias dir=ls
 alias grep='grep --color=auto'
 # In Zsh, history is really fc
