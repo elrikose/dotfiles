@@ -14,7 +14,9 @@ function check_last_exit_code() {
 }
 
 function host_name() {
-  echo "%{$fg_bold[grey]%}$(hostname)%{$reset_color%} "
+  if [ "$(uname -s)" != "Darwin" ]; then
+    echo "%{$fg_bold[grey]%}$(hostname)%{$reset_color%} "
+  fi
 }
 
 function current_path() {
