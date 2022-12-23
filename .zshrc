@@ -13,6 +13,10 @@ function check_last_exit_code() {
   fi
 }
 
+function host_name() {
+  echo "%{$fg_bold[grey]%}$(hostname)%{$reset_color%} "
+}
+
 function current_path() {
   echo "%{$fg[green]%}%(5~|%-1~/.../%3~|%4~)%{$reset_color%}"
 }
@@ -61,7 +65,7 @@ function execution_time() {
 
 autoload -U colors && colors
 setopt PROMPT_SUBST
-PROMPT='$(check_last_exit_code)$(execution_time)$(current_path)$(parse_git_branch) $ '
+PROMPT='$(check_last_exit_code)$(execution_time)$(host_name)$(current_path)$(parse_git_branch) $ '
 
 # Turn off unterminated commands that don't end in a newline like `curl`
 unsetopt prompt_cr prompt_sp
