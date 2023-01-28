@@ -445,46 +445,27 @@ alias up_devops='up_remote devops'
 alias k=kubectl
 source <(kubectl completion zsh)
 
-alias kaf="kubectl apply -f"
+# Dry-run Output
+export DO='--dry-run=client -o yaml'
 
-# Get resources
-alias kgn="kubectl get node"
-alias kgp="kubectl get pod"
-alias kgd="kubectl get deployment"
-alias kgs="kubectl get svc"
-alias kga="kubectl get all"
-alias kgaa="kubectl get all -A"
-
-compdef __start_kubectl kgn
-compdef __start_kubectl kgp
-compdef __start_kubectl kgd
-compdef __start_kubectl kgs
-compdef __start_kubectl kga
-compdef __start_kubectl kgaa
-
-# Describe resources
-alias kdn="kubectl describe node"
-alias kdp="kubectl describe pod"
-alias kdd="kubectl describe deployment"
-alias kds="kubectl describe svc"
-
-compdef __start_kubectl kdn
-compdef __start_kubectl kdp
-compdef __start_kubectl kdd
-compdef __start_kubectl kds
-
+# Apply files
+alias kaf='kubectl apply -f'
+# Get/Describe resources
+alias kg='kubectl get'
+alias kd='kubectl describe'
 # Delete resource quickly
-alias kd="kubectl delete --grace-period=0 --force"
+alias kdel='kubectl delete --grace-period=0 --force'
+
+compdef __start_kubectl kg
 compdef __start_kubectl kd
+compdef __start_kubectl kdel
 
 alias kl="kubectl logs"
 alias kt="kubectl top"
 
-export DO="--dry-run=client -o yaml"
-
 # short alias to set/show context/namespace (only works for bash and bash-compatible shells, current context to be set before using kn to set namespace) 
-alias kctx='f() { [ "$1" ] && kubectl config use-context $1 || kubectl config current-context ; } ; f'
-alias kns='f() { [ "$1" ] && kubectl config set-context --current --namespace $1 || kubectl config view --minify | grep namespace | cut -d" " -f6 ; } ; f'
+alias kx='f() { [ "$1" ] && kubectl config use-context $1 || kubectl config current-context ; } ; f'
+alias kn='f() { [ "$1" ] && kubectl config set-context --current --namespace $1 || kubectl config view --minify | grep namespace | cut -d" " -f6 ; } ; f'
 
 function klabels()
 {
