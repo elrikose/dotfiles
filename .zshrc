@@ -443,14 +443,33 @@ alias up_devops='up_remote devops'
 # Kubernetes
 #
 alias k=kubectl
-alias kn="kubectl get nodes -o wide"
-alias kp="kubectl get pods -o wide"
-alias ks="kubectl get svc -o wide"
-alias ka="kubectl get all -A"
+source <(kubectl completion zsh)
 
-alias kdn="kubectl describe nodes"
-alias kdp="kubectl describe pods"
+alias kaf="kubectl apply -f"
+
+alias kgn="kubectl get node"
+alias kgp="kubectl get pod"
+alias kgd="kubectl get deployment"
+alias kgs="kubectl get svc"
+alias kga="kubectl get all"
+alias kgaa="kubectl get all -A"
+
+compdef __start_kubectl kgn
+compdef __start_kubectl kgp
+compdef __start_kubectl kgd
+compdef __start_kubectl kgs
+compdef __start_kubectl kga
+compdef __start_kubectl kgaa
+
+alias kdn="kubectl describe node"
+alias kdp="kubectl describe pod"
+alias kdd="kubectl describe deployment"
 alias kds="kubectl describe svc"
+
+compdef __start_kubectl kdn
+compdef __start_kubectl kdp
+compdef __start_kubectl kdd
+compdef __start_kubectl kds
 
 alias kl="kubectl logs"
 alias kt="kubectl top"
