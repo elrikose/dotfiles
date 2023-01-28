@@ -447,6 +447,7 @@ source <(kubectl completion zsh)
 
 alias kaf="kubectl apply -f"
 
+# Get resources
 alias kgn="kubectl get node"
 alias kgp="kubectl get pod"
 alias kgd="kubectl get deployment"
@@ -461,6 +462,7 @@ compdef __start_kubectl kgs
 compdef __start_kubectl kga
 compdef __start_kubectl kgaa
 
+# Describe resources
 alias kdn="kubectl describe node"
 alias kdp="kubectl describe pod"
 alias kdd="kubectl describe deployment"
@@ -470,6 +472,10 @@ compdef __start_kubectl kdn
 compdef __start_kubectl kdp
 compdef __start_kubectl kdd
 compdef __start_kubectl kds
+
+# Delete resource quickly
+alias kd="kubectl delete --grace-period=0 --force"
+compdef __start_kubectl kd
 
 alias kl="kubectl logs"
 alias kt="kubectl top"
