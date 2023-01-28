@@ -450,6 +450,8 @@ export DO='--dry-run=client -o yaml'
 
 # Apply files
 alias kaf='kubectl apply -f'
+# Dry-run
+alias kdr='kubectl --dry-run=client -o yaml'
 # Get/Describe resources
 alias kg='kubectl get'
 alias kd='kubectl describe'
