@@ -565,6 +565,10 @@ alias pf="fzf -m --preview 'bat --color=always {}' --preview-window 'right,60%'"
 
 function dict() { open dict:///"$@" ; }
 
+function rgp() { 
+  rg --line-number --no-heading --color=always --smart-case "$@" | fzf -d ':' -n 2.. --ansi --no-sort --preview-window 'down:40%:+{2}' --preview 'bat --style=numbers --color=always --highlight-line {2} {1}'
+}
+
 #
 # Scripts
 #
