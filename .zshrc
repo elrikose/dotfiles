@@ -435,9 +435,9 @@ function up_remote()
    if [[ ! "${stashed}" -eq "0" ]]; then git stash pop --index; fi
 }
 alias up_origin='up_remote origin'
-alias up_upstream='up_remote upstream'
 alias up_emartin='up_remote emartin'
 alias up_devops='up_remote devops'
+alias up_cloud='up_remote cloud'
 
 #
 # Kubernetes
