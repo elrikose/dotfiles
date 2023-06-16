@@ -34,6 +34,13 @@ function parse_git_branch() {
   fi
 }
 
+function current_kube() {
+    KUBECONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+    if [ -n "$KUBECONTEXT" ]; then
+      echo " %{$fg[white]%}($KUBECONTEXT)%{$reset_color%}"
+    fi
+}
+
 # Timer for prompt
 function preexec() {
   timer=$(($(print -P %D{%s%6.})/1000))
@@ -67,7 +74,7 @@ function execution_time() {
 
 autoload -U colors && colors
 setopt PROMPT_SUBST
-PROMPT='$(check_last_exit_code)$(execution_time)$(host_name)$(current_path)$(parse_git_branch) $ '
+PROMPT='$(check_last_exit_code)$(execution_time)$(host_name)$(current_path)$(parse_git_branch)$(current_kube) $ '
 
 # Turn off unterminated commands that don't end in a newline like `curl`
 unsetopt prompt_cr prompt_sp
@@ -333,6 +340,7 @@ function clean_cache()
 #
 # Docker
 #
+alias docker=podman
 alias d=docker
 alias drm="docker container rm -f"
 alias dps="docker ps -a"
@@ -435,9 +443,9 @@ function up_remote()
    if [[ ! "${stashed}" -eq "0" ]]; then git stash pop --index; fi
 }
 alias up_origin='up_remote origin'
+alias up_upstream='up_remote upstream'
 alias up_emartin='up_remote emartin'
-alias up_devops='up_remote devops'
-alias up_cloud='up_remote cloud'
+alias up_ado='up_remote ado'
 
 #
 # Kubernetes
