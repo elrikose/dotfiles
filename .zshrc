@@ -340,7 +340,6 @@ function clean_cache()
 #
 # Docker
 #
-alias docker=podman
 alias d=docker
 alias drm="docker container rm -f"
 alias dps="docker ps -a"
@@ -603,7 +602,7 @@ fi
 # HSTR configuration - add this to ~/.zshrc
 alias hh=hstr                    # hh to be alias for hstr
 setopt histignorespace           # skip cmds w/ leading space from history
-export HSTR_CONFIG=hicolor       # get more colors
+export HSTR_CONFIG=hicolor,raw-history-view       # get more colors, don't rank history by popularity
 bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
 
 #
