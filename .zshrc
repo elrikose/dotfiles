@@ -226,7 +226,7 @@ function unix2mac
 #
 # Journal
 #
-export JOURNAL_DIR="/Volumes/Journal"
+export JOURNAL_DIR="/Users/emartin/Journal"
 alias jrnl='journal.py'
 alias j='journal.py'
 alias cdj='cd "$JOURNAL_DIR"'
