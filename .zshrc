@@ -128,6 +128,8 @@ export HISTFILE=~/.zhistory
 
 # Set the key combinations for emacs for CTRL-A/CTRL-E
 bindkey -e
+bindkey "\e\e[D" backward-word
+bindkey "\e\e[C" forward-word
 
 hist_stats() {
   history | awk '{print $2}' | awk 'BEGIN {FS="|"} {print $1}'| sort | uniq -c | sort -r
