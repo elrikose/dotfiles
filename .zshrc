@@ -35,6 +35,7 @@ function parse_git_branch() {
 }
 
 function current_kube() {
+    if [ ! -f ~/.kube/config ]; then return; fi
     KUBECONTEXT=$(cat ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
     if [ -n "$KUBECONTEXT" ]; then
       echo " %{$fg[white]%}($KUBECONTEXT)%{$reset_color%}"
