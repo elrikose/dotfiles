@@ -1,4 +1,3 @@
-.zmodload zsh/zprof
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:~/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
 
 # Colorize the terminal
@@ -230,7 +229,6 @@ function unix2mac
 # Journal
 #
 export JOURNAL_DIR="/Users/emartin/Journal"
-alias jrnl='journal.py'
 alias j='journal.py'
 alias cdj='cd "$JOURNAL_DIR"'
 
@@ -674,7 +672,5 @@ SYNTAX_HIGHLIGHTING_PLUGIN=$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highl
 [ -f $SYNTAX_HIGHLIGHTING_PLUGIN ] && source $SYNTAX_HIGHLIGHTING_PLUGIN
 
 
-# Load Angular CLI autocompletion.
-source <(ng completion script)
 # Load 1Password autocompletion.
-source <(op completion script)
+source <(op completion zsh)
