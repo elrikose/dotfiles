@@ -1,4 +1,4 @@
-#zmodload zsh/zprof
+.zmodload zsh/zprof
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:~/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
 
 # Colorize the terminal
@@ -496,6 +496,9 @@ function kubexport()
   kubectl config view --minify --flatten --context=$1
 }
 
+alias ki='~/bin/k8s-images.sh'
+alias pi='~/bin/pod-images.sh'
+
 alias pcat='pygmentize -f terminal256 -O style=native -g'
 
 #
@@ -557,11 +560,6 @@ function csv()
     gui_open "$1" Numbers.app
     gui_open "$2" Numbers.app
     gui_open "$3" Numbers.app
-}
-
-function op()
-{
-    open "$1" "$2" "$3"
 }
 
 alias xc=xcode
@@ -674,3 +672,9 @@ function pp()
 # Include zsh syntax highlighting plugin
 SYNTAX_HIGHLIGHTING_PLUGIN=$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -f $SYNTAX_HIGHLIGHTING_PLUGIN ] && source $SYNTAX_HIGHLIGHTING_PLUGIN
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+# Load 1Password autocompletion.
+source <(op completion script)
