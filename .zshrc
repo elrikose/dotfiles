@@ -390,6 +390,8 @@ alias hb='hub browse'
 alias hbc='hub browse -- commits'
 alias hbw='hub browse -- wiki'
 
+alias copilot='gh copilot explain'
+
 function st()
 {
     git status 
